@@ -53,6 +53,12 @@ Before compiling and running the proxy server, ensure you have the following ins
 
     The proxy server will start and listen on port `8080` by default.
 
+5. In another terminal you can run 
+```
+Invoke-WebRequest -Uri "http://www.google.com" -Proxy "http://127.0.0.1:8080"
+```
+to run a GET request for google.com
+
 ## How It Works
 
 1. **Handling Client Connections**: The server accepts incoming client connections and handles each connection in a separate thread.
