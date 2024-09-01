@@ -1,79 +1,87 @@
-###Proxy Server Project
+# Proxy Server Project
 
-##Overview
+## Overview
+
 This project is a multi-threaded HTTP proxy server written in C++. It uses Winsock2 for socket programming and OpenSSL for handling SSL/TLS connections. The server is designed to handle multiple client connections simultaneously, cache cookies, and provide analytics on domain access and cookie patterns, specifically focusing on interactions with www.google.com.
 
-##Features
-    Multi-threaded: Handles multiple clients concurrently using C++ threads.
-    HTTP Proxy: Intercepts HTTP requests and responses, modifying them as needed.
-    Cookie Management: Caches cookies per session and adds them to subsequent requests.
-    SSL/TLS Support: Uses OpenSSL for secure connections.
-    Analytics: Tracks domain access frequency and cookie patterns.
+## Features
 
-##Prerequisites
+- **Multi-threaded**: Handles multiple clients concurrently using C++ threads.
+- **HTTP Proxy**: Intercepts HTTP requests and responses, modifying them as needed.
+- **Cookie Management**: Caches cookies per session and adds them to subsequent requests.
+- **SSL/TLS Support**: Uses OpenSSL for secure connections.
+- **Analytics**: Tracks domain access frequency and cookie patterns.
+
+## Prerequisites
+
 Before compiling and running the proxy server, ensure you have the following installed:
-    MinGW or Cygwin: For using make and compiling the code on Windows.
-    C++ Compiler: g++ from MinGW or another compatible C++ compiler.
 
-##Getting Started
+- **MinGW or Cygwin**: For using `make` and compiling the code on Windows.
+- **C++ Compiler**: `g++` from MinGW or another compatible C++ compiler.
 
-1. Clone the Repository: Clone the repository or download the source code to your local machine.
+## Getting Started
 
-```
-git clone https://github.com/your-repository/proxy-server.git
-cd proxy-server
-```
+1. **Clone the Repository**: Clone the repository or download the source code to your local machine.
 
-2. Install Dependencies:
+    ```bash
+    git clone https://github.com/your-repository/proxy-server.git
+    cd proxy-server
+    ```
 
-MinGW: Install MinGW and make sure mingw32-make is in your system's PATH.
-OpenSSL: Download and install OpenSSL. Make sure the OpenSSL libraries (libssl and libcrypto) and headers are available.
+2. **Install Dependencies**:
 
-3. Compile the Code:
-Make sure you are in the project directory, then use make to compile:
-```
-mingw32-make
-```
-This will compile the source code (main.cpp) and produce an executable named proxy_server.exe.
+   - **MinGW**: Install MinGW and make sure `mingw32-make` is in your system's PATH.
+   - **OpenSSL**: Download and install OpenSSL. Make sure the OpenSSL libraries (`libssl` and `libcrypto`) and headers are available.
 
-4. Run the Proxy Server:
-To run the proxy server, use the following command in PowerShell or Command Prompt:
-```
-.\proxy_server.exe
-```
-The proxy server will start and listen on port 8080 by default.
+3. **Compile the Code**:
 
-##How It Works
+   Make sure you are in the project directory, then use `make` to compile:
 
-Handling Client Connections: The server accepts incoming client connections and handles each connection in a separate thread.
+    ```bash
+    mingw32-make
+    ```
 
-Generating Session IDs: Each client connection is identified by a unique session ID generated from the client's IP address and port.
+    This will compile the source code (`main.cpp`) and produce an executable named `proxy_server.exe`.
 
-Cookie Management:
+4. **Run the Proxy Server**:
 
-    Parses and stores cookies from server responses.
-    Adds stored cookies to client requests before forwarding them to the server.
+   To run the proxy server, use the following command in PowerShell or Command Prompt:
 
-Domain Analytics:
+    ```bash
+    .\proxy_server.exe
+    ```
 
-    Tracks how frequently each domain is accessed.
-    Records the patterns of cookies set by www.google.com and other domains.
-    Logging: Logs requests and responses along with client IPs and domain information.
+    The proxy server will start and listen on port `8080` by default.
 
+## How It Works
 
-Makefile
-The Makefile provided in the project directory includes rules to compile the source files and link against the necessary libraries.
+1. **Handling Client Connections**: The server accepts incoming client connections and handles each connection in a separate thread.
 
-Key Makefile Variables and Targets:
+2. **Generating Session IDs**: Each client connection is identified by a unique session ID generated from the client's IP address and port.
 
-CXX: The C++ compiler (g++).
-CXXFLAGS: Compiler flags for warnings and optimizations.
-LDFLAGS: Linker flags to link the required libraries (-lws2_32, -lssl, -lcrypto).
-TARGET: The name of the output executable (proxy_server).
-clean: Removes compiled objects and the executable.
+3. **Cookie Management**:
+    - Parses and stores cookies from server responses.
+    - Adds stored cookies to client requests before forwarding them to the server.
+
+4. **Domain Analytics**:
+    - Tracks how frequently each domain is accessed.
+    - Records the patterns of cookies set by `www.google.com` and other domains.
+
+5. **Logging**: Logs requests and responses along with client IPs and domain information.
+
+## Makefile
+
+The `Makefile` provided in the project directory includes rules to compile the source files and link against the necessary libraries.
+
+**Key Makefile Variables and Targets**:
+
+- **CXX**: The C++ compiler (`g++`).
+- **CXXFLAGS**: Compiler flags for warnings and optimizations.
+- **LDFLAGS**: Linker flags to link the required libraries (`-lws2_32`, `-lssl`, `-lcrypto`).
+- **TARGET**: The name of the output executable (`proxy_server`).
+- **clean**: Removes compiled objects and the executable.
 
 To clean up build artifacts, run:
 
-```
+```bash
 mingw32-make clean
-```
